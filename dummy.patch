@@ -172,8 +172,8 @@ index 05c39f0..08fe7b1 100644
  out_unlock:
  	task_rq_unlock(rq, p, &flags);
  }
-@@ -3277,6 +3293,8 @@ __setscheduler(struct rq *rq, struct task_struct *p,
-			   const struct sched_attr *attr, bool keep_boost)
+@@ -3277,6 +3293,8 @@ __setscheduler(struct rq *rq, struct task_struct *p, int policy, int prio)
+ 	p->prio = rt_mutex_getprio(p);
  	if (rt_prio(p->prio))
  		p->sched_class = &rt_sched_class;
 +	else if (dummy_prio(p->prio))
