@@ -34,15 +34,16 @@ diff --git a/include/linux/sched.h b/include/linux/sched.h
 index e057ea0..1958e99 100644
 --- a/include/linux/sched.h
 +++ b/include/linux/sched.h
-@@ -1018,6 +1018,9 @@ struct sched_rt_entity {
+@@ -1167,6 +1167,10 @@ struct sched_rt_entity {
  #endif
  };
  
 +struct sched_dummy_entity {
 +	struct list_head run_list;
 +};
- 
- struct rcu_node;
++
+ struct sched_dl_entity {
+ 	struct rb_node	rb_node;
  
 @@ -1046,6 +1049,7 @@ struct task_struct {
  	const struct sched_class *sched_class;
