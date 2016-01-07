@@ -107,7 +107,7 @@ diff --git a/kernel/sched/core.c b/kernel/sched/core.c
 index 05c39f0..08fe7b1 100644
 --- a/kernel/sched/core.c
 +++ b/kernel/sched/core.c
-@@ -1708,8 +1708,13 @@ void sched_fork(struct task_struct *p)
+@@ -1708,8 +1708,13 @@ int sched_fork(unsigned long clone_flags, struct task_struct *p)
  		p->sched_reset_on_fork = 0;
  	}
  
@@ -172,8 +172,8 @@ index 05c39f0..08fe7b1 100644
  out_unlock:
  	task_rq_unlock(rq, p, &flags);
  }
-@@ -3277,6 +3293,8 @@ __setscheduler(struct rq *rq, struct task_struct *p, int policy, int prio)
- 	p->prio = rt_mutex_getprio(p);
+@@ -3277,6 +3293,8 @@ __setscheduler(struct rq *rq, struct task_struct *p,
+			   const struct sched_attr *attr, bool keep_boost)
  	if (rt_prio(p->prio))
  		p->sched_class = &rt_sched_class;
 +	else if (dummy_prio(p->prio))
